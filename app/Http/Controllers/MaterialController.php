@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Material;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
+use App\Services\CategoriaService;
+use App\Services\MaterialService;
 
 class MaterialController extends Controller
 {
@@ -15,7 +18,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $materials = MaterialService::getAllMaterials();
+        return  view(backend.material.index, compact($materials));
     }
 
     /**
@@ -25,7 +29,9 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        $listaCategoria = CategoriaService::getAllCategories();
+        return  view(backend.material.index, compact($listaCategoria));
+
     }
 
     /**
@@ -37,6 +43,7 @@ class MaterialController extends Controller
     public function store(StoreMaterialRequest $request)
     {
         //
+        MaterialService::insertOrUpdateMaterial($request);
     }
 
     /**
@@ -58,6 +65,8 @@ class MaterialController extends Controller
      */
     public function edit(Material $material)
     {
+        return  view(backend.material.edit, compact($material));
+
         //
     }
 
@@ -71,6 +80,8 @@ class MaterialController extends Controller
     public function update(UpdateMaterialRequest $request, Material $material)
     {
         //
+        MaterialService::insertOrUpdateMaterial($request);
+
     }
 
     /**

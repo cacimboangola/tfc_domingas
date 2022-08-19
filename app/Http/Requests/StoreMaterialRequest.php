@@ -24,6 +24,12 @@ class StoreMaterialRequest extends FormRequest
     public function rules()
     {
         return [
+            'codigo'            => 'required',
+            'perecivel'         => 'required',
+            'stock_min'         => 'required',
+            'stock_actual'      => 'required',
+            'categoria_id'      => 'required',
+            'stock_disponivel'  => 'required'
             //
         ];
     }
