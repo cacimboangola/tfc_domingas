@@ -20,6 +20,8 @@ class CreateCompraItemsTable extends Migration
             $table->integer('qtd')->unsigned()->nullable()->default(0);
             $table->double('custo_unitario', 15, 2)->nullable()->default(0.00);
             $table->double('subtotal', 15, 2)->nullable()->default(0.00);
+            $table->bigInteger('material_id')->nullable();
+            $table->foreign('material_id')->references('id')->on('materials');
             $table->bigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

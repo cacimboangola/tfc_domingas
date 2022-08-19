@@ -21,6 +21,8 @@ class CreateRequisicaoItemsTable extends Migration
             $table->integer('qtd_devolvida')->unsigned()->nullable()->default(0);
             $table->date('data_recebimento')->nullable();
             $table->date('data_devolucao')->nullable();
+            $table->bigInteger('material_id')->nullable();
+            $table->foreign('material_id')->references('id')->on('materials');
             $table->bigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
