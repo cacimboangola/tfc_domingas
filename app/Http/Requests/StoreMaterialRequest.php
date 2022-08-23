@@ -14,7 +14,7 @@ class StoreMaterialRequest extends FormRequest
     public function authorize()
     {
         return false;
-    }
+    } 
 
     /**
      * Get the validation rules that apply to the request.
@@ -30,7 +30,7 @@ class StoreMaterialRequest extends FormRequest
             'stock_actual'      => 'required',
             'categoria_id'      => 'required',
             'stock_disponivel'  => 'required'
-            //
+           
         ];
     }
 }

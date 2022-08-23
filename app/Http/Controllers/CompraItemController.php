@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CompraItem;
 use App\Http\Requests\StoreCompraItemRequest;
 use App\Http\Requests\UpdateCompraItemRequest;
+use App\Services\CompraItemService;
 
 class CompraItemController extends Controller
 {
@@ -15,7 +16,8 @@ class CompraItemController extends Controller
      */
     public function index()
     {
-        //
+        $itens_compra = CompraItem::getAllCompraItemUser();
+        return view('compra.index', ['itens_compra'=>$itens_compra]);
     }
 
     /**
@@ -25,7 +27,7 @@ class CompraItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('compra.index');
     }
 
     /**
@@ -36,7 +38,8 @@ class CompraItemController extends Controller
      */
     public function store(StoreCompraItemRequest $request)
     {
-        //
+        CompraItem::insertOrUpdateCompraItem($request);
+        return view('compra.index');
     }
 
     /**
@@ -47,7 +50,7 @@ class CompraItemController extends Controller
      */
     public function show(CompraItem $compraItem)
     {
-        //
+
     }
 
     /**
@@ -58,7 +61,7 @@ class CompraItemController extends Controller
      */
     public function edit(CompraItem $compraItem)
     {
-        //
+        
     }
 
     /**
@@ -70,7 +73,7 @@ class CompraItemController extends Controller
      */
     public function update(UpdateCompraItemRequest $request, CompraItem $compraItem)
     {
-        //
+       
     }
 
     /**

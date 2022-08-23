@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RequisicaoItem;
 use App\Http\Requests\StoreRequisicaoItemRequest;
 use App\Http\Requests\UpdateRequisicaoItemRequest;
+use App\Services\RequisicaoItemService;
 
 class RequisicaoItemController extends Controller
 {
@@ -15,7 +16,7 @@ class RequisicaoItemController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,7 +26,7 @@ class RequisicaoItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('requisicao.index');
     }
 
     /**
@@ -36,7 +37,8 @@ class RequisicaoItemController extends Controller
      */
     public function store(StoreRequisicaoItemRequest $request)
     {
-        //
+        RequisicaoItem::insertOrUpdateRequisicaoItem($request);
+        return view('requisicao.index');
     }
 
     /**
@@ -58,7 +60,7 @@ class RequisicaoItemController extends Controller
      */
     public function edit(RequisicaoItem $requisicaoItem)
     {
-        //
+       
     }
 
     /**

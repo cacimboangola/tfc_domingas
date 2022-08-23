@@ -1,8 +1,8 @@
 <div class="page-heading">
-    <h3>Resumo</h3>
+    <h6>RESUMO</h6>
 </div>
 
-<div class="col-12 col-lg-9">
+<div class="col-md-12">
   <div class="row">
       <div class="col-6 col-lg-3 col-md-6">
           <div class="card">
@@ -10,12 +10,12 @@
                   <div class="row">
                       <div class="col-md-4">
                           <div class="stats-icon purple">
-                              <i class="iconly-boldShow"></i>
+                              <i class="fa fa-bookmark"></i>
                           </div>
                       </div>
                       <div class="col-md-8">
                           <h6 class="text-muted font-semibold">Compras</h6>
-                          <h6 class="font-extrabold mb-0"></h6>
+                          <h6 class="font-extrabold mb-0">12</h6>
                       </div>
                   </div>
               </div>
@@ -27,7 +27,7 @@
                   <div class="row">
                       <div class="col-md-4">
                           <div class="stats-icon blue">
-                              <i class="iconly-boldProfile"></i>
+                          <i class="fa fa-bookmark"></i>
                           </div>
                       </div>
                       <div class="col-md-8">
@@ -44,7 +44,7 @@
                   <div class="row">
                       <div class="col-md-4">
                           <div class="stats-icon green">
-                              <i class="iconly-boldAdd-User"></i>
+                          <i class="fa fa-users"></i>
                           </div>
                       </div>
                       <div class="col-md-8">

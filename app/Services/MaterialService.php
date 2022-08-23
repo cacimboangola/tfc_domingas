@@ -4,15 +4,19 @@ namespace App\Services;
 
 use App\Models\Material;
 use App\Http\Requests\StoreMaterialRequest;
+use App\Http\Requests\UpdateMaterialRequest;
 
 class MaterialService
 {
     public static function insertOrUpdateMaterial($request){
 
         $materialData = $request->all();
-        Material::updateOrCreate(['codigo'=>$materialData['codigo']],$materialData);
+        Material::updateOrCreate(
+            [
+                'codigo' =>$materialData['codigo']
+               
+            ],$materialData);
     }
-
     public static function getAllMaterials(){
         return Material::all();
     }
@@ -20,9 +24,10 @@ class MaterialService
     public static function getMaterialByCodigo($codigo){
 
         return Material::query()
-                        ->where('codigo', codigo)
+                        ->where('codigo', $codigo)
                         ->first();
     }
+    
 
 
 

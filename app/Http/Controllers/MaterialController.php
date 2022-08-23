@@ -18,8 +18,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
+        $listaCategoria = CategoriaService::getAllCategories();
         $materials = MaterialService::getAllMaterials();
-        return  view(backend.material.index, compact($materials));
+        return  view('material.index', ['$materials'=> $materials]);
     }
 
     /**
@@ -30,7 +31,7 @@ class MaterialController extends Controller
     public function create()
     {
         $listaCategoria = CategoriaService::getAllCategories();
-        return  view(backend.material.index, compact($listaCategoria));
+        return  view('material.index', ['listaCategoria' => $listaCategoria]);
 
     }
 
@@ -42,8 +43,9 @@ class MaterialController extends Controller
      */
     public function store(StoreMaterialRequest $request)
     {
-        //
+       
         MaterialService::insertOrUpdateMaterial($request);
+        return view('material.index');
     }
 
     /**
@@ -65,7 +67,8 @@ class MaterialController extends Controller
      */
     public function edit(Material $material)
     {
-        return  view(backend.material.edit, compact($material));
+        $listaCategoria = CategoriaService::getAllCategories();
+        return  view('material.index', compact($material));
 
         //
     }
@@ -79,8 +82,9 @@ class MaterialController extends Controller
      */
     public function update(UpdateMaterialRequest $request, Material $material)
     {
-        //
+        
         MaterialService::insertOrUpdateMaterial($request);
+        return view('material.index');
 
     }
 

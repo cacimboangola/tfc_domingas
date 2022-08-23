@@ -24,7 +24,13 @@ class StoreRequisicaoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'data'=> 'required',
+            'obs'=> 'required',
+            'estado'=> 'required',
+            'total'=> 'required',
+            'user_id' => 'required'
+            
+
         ];
     }
 }

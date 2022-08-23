@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
+use App\Services\CategoriaService;
 
 class CategoriaController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+       $category = CategoriaService::getAllCategories();
+       return view('compra.index', ['category'=>$category]);
     }
 
     /**
@@ -25,7 +27,8 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('compra.index'); 
+        
     }
 
     /**
@@ -36,7 +39,9 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        //
+        Categoria::insertOrUpdateCategoria($request);
+        return view('compra.index');
+
     }
 
     /**
@@ -47,7 +52,8 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        $category = CategoriaService::getCategoryById();
+        return view('compra.ver_categoria', ['category'=>$category]);
     }
 
     /**
@@ -58,7 +64,8 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
+        $category = CategoriaService::getCategoryById();
+        return view('compra.criar_categoria', ['category'=>$category]);
     }
 
     /**
@@ -70,7 +77,8 @@ class CategoriaController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        //
+        Categoria::insertOrUpdateCategoria($request);
+        return view('compra.index');
     }
 
     /**

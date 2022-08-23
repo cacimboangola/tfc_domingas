@@ -24,7 +24,8 @@ class UpdateCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
+            'nome'=>'required|string|max:255',
+            'rotulo'=>'required'  
+              ];
     }
 }

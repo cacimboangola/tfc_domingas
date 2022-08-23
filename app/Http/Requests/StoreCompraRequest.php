@@ -24,7 +24,9 @@ class StoreCompraRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'data'=>'required',
+            'total'=> 'required',
+             'user_id' => 'riquired'
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Compra;
 use App\Http\Requests\StoreCompraRequest;
 use App\Http\Requests\UpdateCompraRequest;
+use App\Services\CompraService;
 
 class CompraController extends Controller
 {
@@ -15,7 +16,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-        //
+       $compra = CompraService::getAllCompra();
+       return view('compra.index', ['compra'=>$compra]);
     }
 
     /**
@@ -25,7 +27,7 @@ class CompraController extends Controller
      */
     public function create()
     {
-        //
+        return view('compra.index');
     }
 
     /**
@@ -36,7 +38,8 @@ class CompraController extends Controller
      */
     public function store(StoreCompraRequest $request)
     {
-        //
+        Compra::insertOrUpdateCompra($request);
+        return view('compra.index');
     }
 
     /**
@@ -47,7 +50,8 @@ class CompraController extends Controller
      */
     public function show(Compra $compra)
     {
-        //
+        $compraPorId = CategoriaService::getAllCompraById();
+        return view('compra.ver_compra', ['compraPorId'=>$compraPorId]);
     }
 
     /**
@@ -58,7 +62,8 @@ class CompraController extends Controller
      */
     public function edit(Compra $compra)
     {
-        //
+        $compraPorId = CategoriaService::getAllCompraById();
+        return view('compra.criar_compra', ['compraPorId'=>$compraPorId]);
     }
 
     /**
@@ -70,7 +75,8 @@ class CompraController extends Controller
      */
     public function update(UpdateCompraRequest $request, Compra $compra)
     {
-        //
+        Compra::insertOrUpdateCategoria($request);
+        return view('compra.index');
     }
 
     /**

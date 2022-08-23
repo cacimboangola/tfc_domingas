@@ -17,8 +17,7 @@ class CreateComprasTable extends Migration
             $table->id();
             $table->date('data')->nullable();
             $table->double('total', 15, 2)->nullable()->default(0.00);
-            $table->bigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

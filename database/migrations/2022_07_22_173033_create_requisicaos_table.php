@@ -19,8 +19,8 @@ class CreateRequisicaosTable extends Migration
             $table->string('obs', 100)->nullable();
             $table->integer('estado')->unsigned()->nullable()->default(0);
             $table->double('total', 15, 2)->nullable()->default(0.00);
-            $table->bigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+           /* $table->bigInteger('user_id')->nullable();*/
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

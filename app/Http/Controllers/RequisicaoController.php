@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Requisicao;
 use App\Http\Requests\StoreRequisicaoRequest;
 use App\Http\Requests\UpdateRequisicaoRequest;
+use App\Services\RequisicaoService;
 
 class RequisicaoController extends Controller
 {
@@ -14,8 +15,10 @@ class RequisicaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {  
+        $requisicao = RequisicaoService::getAllRequisicao();
+        return view('requisicao.index', ['requisicao'=>$requisicao]);
+        
     }
 
     /**
@@ -25,7 +28,7 @@ class RequisicaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('requisicao.criar_requisicao');
     }
 
     /**
@@ -36,7 +39,8 @@ class RequisicaoController extends Controller
      */
     public function store(StoreRequisicaoRequest $request)
     {
-        //
+        Requisicao::insertOrUpdateRequisicao($request);
+        return view('requisicao.index');
     }
 
     /**
@@ -47,7 +51,7 @@ class RequisicaoController extends Controller
      */
     public function show(Requisicao $requisicao)
     {
-        //
+       
     }
 
     /**
@@ -58,7 +62,8 @@ class RequisicaoController extends Controller
      */
     public function edit(Requisicao $requisicao)
     {
-        //
+        $requisicao = RequisicaoService::getAllRequisicaoById();
+        return view('requisicao.criar_requisicao', ['requisicao'=>$requisicao]);
     }
 
     /**
@@ -70,7 +75,8 @@ class RequisicaoController extends Controller
      */
     public function update(UpdateRequisicaoRequest $request, Requisicao $requisicao)
     {
-        //
+        Requisicao::insertOrUpdateRequisicao($request);
+        return view('requisicao.index');
     }
 
     /**

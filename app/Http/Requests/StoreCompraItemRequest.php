@@ -23,8 +23,14 @@ class StoreCompraItemRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        return [ 
+            'qtd'=>'required',
+            'custo_unitario'=> 'required',
+            'subtotal' => 'required',
+            'material_id' => 'required',
+            'user_id' => 'required',
+            'compra_id' => 'required'
+            
         ];
     }
 }

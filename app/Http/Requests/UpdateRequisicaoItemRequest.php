@@ -24,7 +24,14 @@ class UpdateRequisicaoItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'qtd_solicitada' => 'riquired',
+            'qtd_recebida' => 'riquired',
+            'qtd_devolvida' => 'riquired',
+            'data_recebimento' => 'riquired',
+            'data_devolucao' => 'riquired',
+            'material_id' => 'riquired',
+            'user_id' => 'riquired',
+            'requisicao_id' => 'riquired'
         ];
     }
 }
