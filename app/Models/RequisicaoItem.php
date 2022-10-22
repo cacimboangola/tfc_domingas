@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Material;
 
 class RequisicaoItem extends Model
 {
@@ -16,8 +17,8 @@ class RequisicaoItem extends Model
         'data_devolucao',
         'material_id',
         'user_id',
-        'requisicao_id'
-
+        'requisicao_id',
+        'subtotal'
     ];
     public function material(){
         return $this->hasMany(Material::class, 'material_id');
@@ -31,5 +32,11 @@ class RequisicaoItem extends Model
     public function requisicao()
     {
         return $this->belongsTo(Requisicao::class, 'requisicao_id');
+    }
+
+    public function calculateAndSetSubTotal(Material $product, $quantity){
+
+        $this->subtotal = $product->preco * $quantity;
+        $this->save();
     }
 }

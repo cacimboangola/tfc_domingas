@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
+use App\Models\Categoria;
 use App\Services\CategoriaService;
 
 class CategoriaController extends Controller
@@ -18,6 +18,7 @@ class CategoriaController extends Controller
     {
        $category = CategoriaService::getAllCategories();
        return view('compra.index', ['category'=>$category]);
+
     }
 
     /**
@@ -27,8 +28,8 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('compra.index'); 
-        
+        return view('compra.index');
+
     }
 
     /**

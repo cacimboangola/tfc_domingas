@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateCompraRequest;
 
 class CompraService
 {
-    public static function insertOrUpdateCompra()
+    public static function insertOrUpdateCompra($request)
     {
         $compraData = $request->all();
         Compra::updateOrCreate(
@@ -29,4 +29,6 @@ class CompraService
     {
         return Compra::all();
     }
+
+
 }

@@ -21,4 +21,8 @@ class Compra extends Model
     public function getUserNameAttribute(){
         return $this->user()->name;
     }
+
+    public function itens(){
+        return $this->hasMany(CompraItem::class);
+    }
 }

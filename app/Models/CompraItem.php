@@ -17,10 +17,16 @@ class CompraItem extends Model
         'user_id',
         'compra_id'
     ];
-    
+
+    public function calculateAndSetSubTotal(Material $product, $quantity){
+
+        $this->subtotal = $product->preco * $quantity;
+        $this->save();
+    }
+
     public function materials(){
         $this->hasMany(Material::class, 'material_id');
-    } 
+    }
     public function user(){
         $this->belongsTo(User::class, 'user_id');
     }

@@ -14,10 +14,8 @@ class Requisicao extends Model
         'obs',
         'estado',
         'total',
-        'user_id',
-        
-
-    ]; 
+        'user_id'
+    ];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
@@ -25,8 +23,8 @@ class Requisicao extends Model
     public function getUserNameAttribute(){
         return $this->user()->name;
     }
-    public function item_requisicao()
+    public function itens()
     {
-        return $this->hasMany(RequisicaoItem::class, 'id_requisicao');
+        return $this->hasMany(RequisicaoItem::class);
     }
 }

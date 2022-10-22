@@ -15,9 +15,17 @@ class Material extends Model
         'stock_min',
         'stock_actual',
         'categoria_id',
-        'stock_disponivel'
+        'stock_disponivel',
+        'preco'
     ];
     public function categoria(){
         $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    public function compraItens(){
+        $this->hasMany(CompraItem::class);
+    }
+    public function requisicaoItens(){
+        $this->hasMany(RequisicaoItem::class);
     }
 }
