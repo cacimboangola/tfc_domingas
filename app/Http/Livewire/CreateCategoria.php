@@ -10,21 +10,15 @@ class CreateCategoria extends Component
 
     public $nome;
     public $rotulo;
-    public $categoria;
     public $categoria_id;
 
-    public function mount($categoria){
-        $this->categoria_id = $categoria->id;
-        $this->preco = $categoria->preco;
-        $this->nome = $categoria->nome;
-    }
-    public function store($categoria_id){
+
+    public function store(){
         $this->validate([
             'nome' => 'required|max:255',
             'rotulo' => 'required',
         ]);
-        $categoriaUpdate = Categoria::find($categoria_id);
-        $categoriaUpdate->create([
+        Categoria::create([
             'nome' => $this->nome,
             'rotulo' => $this->rotulo,
         ]);

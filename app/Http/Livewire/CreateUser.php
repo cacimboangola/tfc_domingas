@@ -15,14 +15,13 @@ class CreateUser extends Component
 
 
     protected $rules = [
-            'name' => 'required|min:6|regex:/^[a-zA-Z]+$/u|max:255',
+            'name' => 'required|min:6|max:255',
             'email' => 'required|email',
-            'tipo' => 'required|regex:/^[a-zA-Z]+$/u|max:100',
+            'tipo' => 'required|max:100',
             'password' => 'required|min:8'
         ];
     protected $messages = [
         'name.min' =>'O nome deve conter no minimo 6 Letras',
-        'name.regex' =>'O nome não pode ter numeros',
         'email.email' =>'Preencha um email valido',
         'password.min' =>'A Senha deve ter no minimo 8 caracteres',
     ];

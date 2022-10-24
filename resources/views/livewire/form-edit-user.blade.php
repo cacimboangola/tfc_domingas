@@ -14,13 +14,6 @@
         @enderror
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">Password</label>
-        <input type="password" class="form-control" id="codigo" wire:model="password" placeholder="password">
-        @error('password')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
-    <div class="form-group">
         <label>Categoria</label>
         <select class="form-control select2" wire:model="tipo" style="width: 100%;">
             <option> Seleciona o Tipo </option>
