@@ -17,6 +17,7 @@ class CreateCompra extends Component
     public $custo_unitario;
     public $subtotal;
     public $material_id;
+    public $material;
     public $compraItens;
     public $compra;
     public $materials;
@@ -27,6 +28,7 @@ class CreateCompra extends Component
 
     protected $rules = [
         'compraItens.*.qtd' => 'required|number',
+        'material_id' => 'required',
         'compraItens.*.subtotal' => 'required|number|max:500',
     ];
     public function render()
@@ -51,6 +53,7 @@ class CreateCompra extends Component
             ]);
     }
     public function addItem($compra_id){
+        $this->validate();
         $this->material = Material::find($this->material_id);
         $item = CompraItem::create(
             [

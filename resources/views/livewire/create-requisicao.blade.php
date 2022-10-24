@@ -46,14 +46,18 @@
                     <div class="card-body">
                         <div class="form-group ">
                             <label for="preco">Material</label>
-                            <select class="form-control select2 col-md-12 mr-3" wire:model="material_id"
-                                style="width: 100%;">
-                                <option> Seleciona o Material </option>
+                            <select class="form-control select2 col-md-12 mr-3 @error('material_id') border-danger
+                            @enderror" wire:model="material_id"
+                                    style="width: 100%;">
+                                <option @error('material_id') selected="selected" @enderror> Seleciona o Material </option>
                                 @foreach ($materials as $material)
-                                    <option @if ($loop->first) selected="selected" @endif
-                                        value="{{ $material->id }}">{{ $material->codigo }}</option>
+                                    <option selected="selected"
+                                            value="{{ $material->id }}">{{ $material->codigo }} - {{ $material->nome }}</option>
                                 @endforeach
                             </select>
+                            @error('material_id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="row d-flex justify-content-between">
                             <div class="form-group col-md-4">
@@ -172,7 +176,7 @@
                                             <div
                                                 class="d-flex align-content-center justify-content-between align-items-center">
                                                 <div class="form-group">
-                                                    <input type="date" class="form-control" id="data_inicio" wire:model="requisicaoItens.{{ $index }}.data_recebimento">
+                                                    <input type="date" class="form-control" wire:keydown.enter="updateDataRecebimento({{ $requisicaoIten->id }})" wire:model="requisicaoItens.{{ $index }}.data_recebimento">
                                                 </div>
                                             </div>
                                         </td>
@@ -180,7 +184,7 @@
                                             <div
                                                 class="d-flex align-content-center justify-content-between align-items-center">
                                                 <div class="form-group">
-                                                    <input type="date" class="form-control" id="data_inicio" wire:model="requisicaoItens.{{ $index }}.data_devolucao">
+                                                    <input type="date" class="form-control" wire:keydown.enter="updateDataDevolucao({{ $requisicaoIten->id }})" id="data_inicio" wire:model="requisicaoItens.{{ $index }}.data_devolucao">
                                                 </div>
                                             </div>
                                         </td>

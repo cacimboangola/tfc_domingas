@@ -46,7 +46,7 @@ class EditMaterial extends Component
         $materialUpdate = Material::find($material_id);
         $materialUpdate->update([
             'codigo' => $this->codigo,
-            'nome' => $this->codigo,
+            'nome' => $this->nome,
             'stock_min' => $this->stock_min,
             'stock_actual' => $this->stock_actual,
             'categoria_id' => $this->categoria_id,

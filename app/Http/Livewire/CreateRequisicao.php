@@ -33,6 +33,7 @@ class CreateRequisicao extends Component
 
     protected $rules = [
         'requisicaoItens.*.qtd_solicitada' => 'required|number',
+        'material_id' => 'required',
         'requisicaoItens.*.qtd_recebida' => 'required|number',
         'requisicaoItens.*.qtd_devolvida' => 'required|number',
         'requisicaoItens.*.qtd_solicitada' => 'required|number',
@@ -69,8 +70,9 @@ class CreateRequisicao extends Component
             ]);
     }
     public function addItem($requisicao_id){
-        $total = 0;
-        $this->material = Material::find($this->material_id);
+        $this->validate();
+        //$total = 0;
+        //$material= Material::find($this->material_id);
         $item = RequisicaoItem::create(
             [
                 'qtd_solicitada' => 1,
@@ -91,7 +93,7 @@ class CreateRequisicao extends Component
                 'message'=>'Item Adicionado com Sucesso'
             ]);
     }
-    public function updatedQtdSolicitada($item_id){
+    public function updateQtdSolicitada($item_id){
         $item = RequisicaoItem::find($item_id);
         $item->update([
             'qtd_solicitada' => $this->qtd_solicitada,
@@ -99,7 +101,7 @@ class CreateRequisicao extends Component
         $this->requisicaoItens = RequisicaoItem::where('requisicao_id', $this->requisicao->id)->get();
 
     }
-    public function updatedQtdRecebida($item_id){
+    public function updateQtdRecebida($item_id){
         $item = RequisicaoItem::find($item_id);
         $item->update([
             'qtd_recebida' => $this->qtd_recebida,
@@ -107,7 +109,7 @@ class CreateRequisicao extends Component
         $this->requisicaoItens = RequisicaoItem::where('requisicao_id', $this->requisicao->id)->get();
 
     }
-    public function updatedQtdDevolvida($item_id){
+    public function updateQtdDevolvida($item_id){
         $item = RequisicaoItem::find($item_id);
         $item->update([
             'qtd_devolvida' => $this->qtd_devolvida,
@@ -115,7 +117,7 @@ class CreateRequisicao extends Component
         $this->requisicaoItens = RequisicaoItem::where('requisicao_id', $this->requisicao->id)->get();
 
     }
-    public function updatedDataRecebimento($item_id){
+    public function updateDataRecebimento($item_id){
         $item = RequisicaoItem::find($item_id);
         $item->update([
             'data_recebimento' => $this->data_recebimento,
@@ -123,7 +125,7 @@ class CreateRequisicao extends Component
         $this->requisicaoItens = RequisicaoItem::where('requisicao_id', $this->requisicao->id)->get();
 
     }
-    public function updatedDataDevolucao($item_id){
+    public function updateDataDevolucao($item_id){
         $item = RequisicaoItem::find($item_id);
         $item->update([
             'data_devolucao' => $this->data_devolucao,
@@ -135,9 +137,9 @@ class CreateRequisicao extends Component
         $total = 0;
         $requisicao = Requisicao::find($requisicao_id);
         foreach ($requisicao->itens as $item){
-            $stock = $this->material->stock_actual + $item->qtd_recebida;
+            $stock = $item->material->stock_actual + $item->qtd_recebida;
             $total += $item->qtd_solicitada * $item->material->preco;
-            $this->material->update(['stock_actual', $stock]);
+            $item->material->update(['stock_actual', $stock]);
         }
         $requisicao->update(['total' => $total]);
         return redirect()->route('requisicaos.show', $requisicao->id)->with(['success'=>'Requisição efectuada com sucesso']);

@@ -35,6 +35,7 @@ class CreateMaterial extends Component
         ]);
         Material::create([
             'codigo' => $this->codigo,
+            'nome' => $this->nome,
             'stock_min' => $this->stock_min,
             'stock_actual' => $this->stock_actual,
             'categoria_id' => $this->categoria_id,

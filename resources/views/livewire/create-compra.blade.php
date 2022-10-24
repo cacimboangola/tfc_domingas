@@ -46,14 +46,18 @@
                     <div class="card-body">
                         <div class="form-group ">
                             <label for="preco">Material</label>
-                            <select class="form-control select2 col-md-12 mr-3" wire:model="material_id"
+                            <select class="form-control select2 col-md-12 mr-3 @error('material_id') border-danger
+                            @enderror" wire:model="material_id"
                                 style="width: 100%;">
-                                <option> Seleciona o Material </option>
+                                <option @error('material_id') selected="selected" @enderror> Seleciona o Material </option>
                                 @foreach ($materials as $material)
-                                    <option @if ($loop->first) selected="selected" @endif
-                                        value="{{ $material->id }}">{{ $material->codigo }}</option>
+                                    <option selected="selected"
+                                        value="{{ $material->id }}">{{ $material->codigo }} - {{ $material->nome }}</option>
                                 @endforeach
                             </select>
+                            @error('material_id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="row d-flex justify-content-between">
                             <div class="form-group col-md-4">
@@ -82,8 +86,8 @@
                             </div>
 
                         </div>
-                        <button class="btn btn-primary float-right" style="float: right"
-                            wire:click="addItem({{ $compra->id }})">Add Material</button>
+                        <button class="btn btn-outline-info float-right" style="float: right"
+                            wire:click="addItem({{ $compra->id }})"> <i class="fas fa-plus-circle"></i> Add Material</button>
 
                     </div>
                     <!-- /.card-body -->

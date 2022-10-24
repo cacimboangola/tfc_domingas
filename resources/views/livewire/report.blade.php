@@ -101,8 +101,8 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
-                        <table class="table table-striped bg-success">
-                            <thead>
+                        <table class="table table-striped ">
+                            <thead class="bg-success">
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Nome</th>
@@ -140,8 +140,8 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
-                        <table class="table table-striped bg-info">
-                            <thead>
+                        <table class="table table-striped ">
+                            <thead class="bg-info">
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Nome</th>
