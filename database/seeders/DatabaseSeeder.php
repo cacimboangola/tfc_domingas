@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MaterialSeeder::class,
             CategoriaSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

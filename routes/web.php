@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 });
 Route::group(['middleware'=>['auth'], 'prefix'=> 'admin'],function() {
 
-    /*=================== MATERIAL =============== */
     Route::resources([
         'materials' => MaterialController::class,
         'compras' => CompraController::class,
@@ -29,7 +28,6 @@ Route::group(['middleware'=>['auth'], 'prefix'=> 'admin'],function() {
     Route::resource('users',UserController::class)->middleware('admin');
     Route::get('reports', [ReportController::class, 'create'])->name('reports');
 });
-
 
 Auth::routes();
 
