@@ -16,8 +16,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-       $category = CategoriaService::getAllCategories();
-       return view('compra.index', ['category'=>$category]);
+       $categories = CategoriaService::getAllCategories();
+       return view('categorias.index', compact('categories'));
 
     }
 
@@ -28,7 +28,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('compra.index');
+        return view('categorias.index');
 
     }
 
@@ -40,8 +40,9 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        Categoria::insertOrUpdateCategoria($request);
-        return view('compra.index');
+        $categoria = $request->all();
+        Categoria::create($categoria);
+        return redirect()->route('categories.index');
 
     }
 
@@ -53,8 +54,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        $category = CategoriaService::getCategoryById();
-        return view('compra.ver_categoria', ['category'=>$category]);
+        return view('categorias.show', compact('categoria'));
     }
 
     /**
@@ -65,8 +65,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        $category = CategoriaService::getCategoryById();
-        return view('compra.criar_categoria', ['category'=>$category]);
+        return view('categorias.edit', compact('categoria'));
     }
 
     /**
@@ -78,8 +77,9 @@ class CategoriaController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        Categoria::insertOrUpdateCategoria($request);
-        return view('compra.index');
+        $categoria->update($request->all());
+        return redirect()->route('categories.index');
+
     }
 
     /**
@@ -90,6 +90,7 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+        return redirect()->back()->with(['success'=>"Eliminado com Sucesso"]);
     }
 }

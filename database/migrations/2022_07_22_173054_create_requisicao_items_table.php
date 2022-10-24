@@ -21,11 +21,10 @@ class CreateRequisicaoItemsTable extends Migration
             $table->integer('qtd_devolvida')->unsigned()->nullable()->default(0);
             $table->date('data_recebimento')->nullable();
             $table->date('data_devolucao')->nullable();
-            /**$table->bigInteger('material_id')->nullable();**/
+            $table->string('fornecedor_nome')->nullable();
+            $table->string('fornecedor_telefone')->nullable();
+            $table->string('fornecedor_endereco')->nullable();
             $table->foreignId('material_id')->references('id')->on('materials');
-           /* $table->bigInteger('user_id')->nullable();*/
-            $table->foreignId('user_id')->references('id')->on('users');
-            /**$table->bigInteger('requisicao_id')->nullable();**/
             $table->foreignId('requisicao_id')->references('id')->on('requisicaos');
             $table->timestamps();
         });

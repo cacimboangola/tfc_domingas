@@ -18,9 +18,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $listaCategoria = CategoriaService::getAllCategories();
-        $materials = MaterialService::getAllMaterials();
-        return  view('material.index', ['$materials'=> $materials]);
+        $materials = Material::all();
+        return  view('materials.index', compact('materials'));
     }
 
     /**
@@ -30,8 +29,8 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        $listaCategoria = CategoriaService::getAllCategories();
-        return  view('material.index', ['listaCategoria' => $listaCategoria]);
+        $categories = Categoria::all();
+        return  view('materials.create', compact('categories'));
 
     }
 
@@ -43,9 +42,8 @@ class MaterialController extends Controller
      */
     public function store(StoreMaterialRequest $request)
     {
-       
-        MaterialService::insertOrUpdateMaterial($request);
-        return view('material.index');
+        $material = Material::create($request->all());
+        return redirect()->route()->with(['success'=>'Registo Cadastrado com Sucesso']);
     }
 
     /**
@@ -56,7 +54,7 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        //
+        return view('materials.edit', compact('material'));
     }
 
     /**
@@ -67,8 +65,8 @@ class MaterialController extends Controller
      */
     public function edit(Material $material)
     {
-        $listaCategoria = CategoriaService::getAllCategories();
-        return  view('material.index', compact($material));
+        $categories = Categoria::all();
+        return  view('materials.edit', compact('categories', 'material'));
 
         //
     }
@@ -82,9 +80,8 @@ class MaterialController extends Controller
      */
     public function update(UpdateMaterialRequest $request, Material $material)
     {
-        
-        MaterialService::insertOrUpdateMaterial($request);
-        return view('material.index');
+        $material->update($request->all());
+        return redirect()->route('materials.index')->with(['success'=>'Registo Actualizado com Sucesso']);
 
     }
 
@@ -96,6 +93,7 @@ class MaterialController extends Controller
      */
     public function destroy(Material $material)
     {
-        //
+        $material->delete();
+        return redirect()->route('materials.index')->with(['success'=>'Registo Apagado com Sucesso']);
     }
 }

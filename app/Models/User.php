@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tipo',
     ];
 
     /**
@@ -45,29 +46,15 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function compra()
+    public function compras()
     {
-        return $this->hasMany('App\Models\Compra', 'user_id');
+        return $this->hasMany('App\Models\Compra');
     }
     /**
      * @return HasMany
      */
-    public function compra_item()
+    public function requisicaos()
     {
-        return $this->hasMany('App\Models\CompraItem', 'user_id');
-    }
-    /**
-     * @return HasMany
-     */
-    public function requisicao()
-    {
-        return $this->hasMany('App\Models\Requisicao', 'user_id');
-    }
-    /**
-     * @return HasMany
-     */
-    public function requisicao_item()
-    {
-        return $this->hasMany('App\Models\RequisicaoItem', 'user_id');
+        return $this->hasMany('App\Models\Requisicao');
     }
 }

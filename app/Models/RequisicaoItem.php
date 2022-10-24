@@ -15,13 +15,16 @@ class RequisicaoItem extends Model
         'qtd_devolvida',
         'data_recebimento',
         'data_devolucao',
+        'fornecedor_nome',
+        'fornecedor_telefone',
+        'fornecedor_endereco',
         'material_id',
         'user_id',
         'requisicao_id',
         'subtotal'
     ];
     public function material(){
-        return $this->hasMany(Material::class, 'material_id');
+        return $this->belongsTo(Material::class, 'material_id');
     }
     public function user(){
         return $this->belongsTo(User::class, 'user_id');

@@ -3,16 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Cacimbo</title>
+    <title>Admin</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/plugins/Font-Awesome/fontawesome5/css/all.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('cacimbofront/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('cacimbofront/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('cacimbofront/toastr/toastr.min.css')}}">
+    @livewireStyles
     @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -147,11 +156,6 @@
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
-                </a>
-            </li>
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -191,34 +195,56 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <i class="nav-icon fas fa-archive"></i>
                             <p>
-                                Tarefas
+                                Materias
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('adm-tasks')}}" class="nav-link">
+                                <a href="{{route('materials.index')}}" class="nav-link">
+                                    <i class="fas fa-bullseye nav-icon"></i>
+                                    <p>Lista</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('categorias.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Analitycs</p>
+                                    <p>Categorias</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('adm-licenses')}}" class="nav-link">
-                            <i class="nav-icon fas fa-edit"></i>
+                        <a href="{{route('compras.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-bag"></i>
                             <p>
-                                Licenses
+                                Compras
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('adm-clientes')}}" class="nav-link">
-                            <i class="nav-icon fas fa-edit"></i>
+                        <a href="{{route('requisicaos.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-receipt"></i>
                             <p>
-                                Clientes
+                                Requisições
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('reports')}}" class="nav-link">
+                            <i class="nav-icon fas fa-chart-line"></i>
+                            <p>
+                                Relatorios Periodicos
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('users.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Utilizadores
                             </p>
                         </a>
                     </li>
@@ -229,6 +255,14 @@
         <!-- /.sidebar -->
 
         <div class="sidebar-custom">
+            <a class="btn btn-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
             <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
             <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
         </div>
@@ -246,7 +280,7 @@
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
         </div>
-        <strong>Copyright &copy; 2022 <a href="https://cacimboweb.com">Cacimbo Web</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2022 <a href="#">Domingas Caconda</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->
@@ -265,6 +299,109 @@
 <script src="{{asset('cacimbofront/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('cacimbofront/js/adminlte.min.js')}}"></script>
+
+<script src="{{asset('cacimbofront/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('cacimbofront/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('cacimbofront/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('cacimbofront/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('cacimbofront/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('cacimbofront/select2/js/select2.full.min.js')}}"></script>
+<script src="{{asset('cacimbofront/inputmask/jquery.inputmask.min.js')}}"></script>
+<!-- date-range-picker -->
+<script src="{{asset('cacimbofront/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{asset('cacimbofront/toastr/toastr.min.js')}}"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+
+        //Date and time picker
+        $('#reservationdatetime').datetimepicker({icons: {time: 'far fa-clock'}});
+
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+        })
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
+
+        //Timepicker
+        $('#timepicker').datetimepicker({
+            format: 'LT',
+        });
+    })
+</script>
+@livewireScripts
 @stack('scripts')
+<script>
+        window.addEventListener(
+            'toastr:success', event =>{
+            toastr.success(event.detail.message);
+            })
+</script>
+
 </body>
 </html>

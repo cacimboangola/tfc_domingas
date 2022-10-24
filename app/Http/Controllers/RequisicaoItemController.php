@@ -16,7 +16,7 @@ class RequisicaoItemController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -26,7 +26,7 @@ class RequisicaoItemController extends Controller
      */
     public function create()
     {
-        return view('requisicao.index');
+        return view('requisicaos.index');
     }
 
     /**
@@ -38,7 +38,7 @@ class RequisicaoItemController extends Controller
     public function store(StoreRequisicaoItemRequest $request)
     {
         RequisicaoItem::insertOrUpdateRequisicaoItem($request);
-        return view('requisicao.index');
+        return view('requisicaos.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class RequisicaoItemController extends Controller
      */
     public function edit(RequisicaoItem $requisicaoItem)
     {
-       
+
     }
 
     /**

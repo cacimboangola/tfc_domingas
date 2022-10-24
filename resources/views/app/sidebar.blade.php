@@ -49,7 +49,7 @@
                 </ul>
               </li>
               <li class="sidebar-item  {{ (request()->is('materiais*')) ? 'active' : ''  }}">
-                  <a href="{{ route('material.index')}}" class='sidebar-link'>
+                  <a href="{{ route('materials.index')}}" class='sidebar-link'>
                       <i class="bi bi-puzzle"></i>
                       <span>Materiais</span>
                   </a>

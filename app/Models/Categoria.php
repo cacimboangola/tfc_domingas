@@ -14,7 +14,7 @@ class Categoria extends Model
     ];
 
    public function materials(){
-       $this->hasMany(Material::class);
+       return  $this->hasMany(Material::class);
    }
 }
 

@@ -15,9 +15,9 @@ class CreateComprasTable extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->date('data')->nullable();
+            $table->dateTime('data')->nullable();
             $table->double('total', 15, 2)->nullable()->default(0.00);
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

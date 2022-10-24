@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Requisicao;
 use App\Http\Requests\StoreRequisicaoRequest;
 use App\Http\Requests\UpdateRequisicaoRequest;
+use App\Models\Requisicao;
+use App\Models\Material;
 use App\Services\RequisicaoService;
 
 class RequisicaoController extends Controller
@@ -15,10 +16,9 @@ class RequisicaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
-        $requisicao = RequisicaoService::getAllRequisicao();
-        return view('requisicao.index', ['requisicao'=>$requisicao]);
-        
+    {
+        $requisicaos = Requisicao::all();
+        return view('Requisicaos.index', compact('requisicaos'));
     }
 
     /**
@@ -28,7 +28,8 @@ class RequisicaoController extends Controller
      */
     public function create()
     {
-        return view('requisicao.criar_requisicao');
+        $materials = Material::all();
+        return view('requisicaos.create', compact('materials'));
     }
 
     /**
@@ -39,54 +40,55 @@ class RequisicaoController extends Controller
      */
     public function store(StoreRequisicaoRequest $request)
     {
-        Requisicao::insertOrUpdateRequisicao($request);
-        return view('requisicao.index');
+        Requisicao::create($request->all());
+        return redirect()->back()->with(['success'=>'Requisicao Cadastrada com Sucesso']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Requisicao  $requisicao
+     * @param  \App\Models\Requisicao  $Requisicao
      * @return \Illuminate\Http\Response
      */
     public function show(Requisicao $requisicao)
     {
-       
+        return view('Requisicaos.show', compact('requisicao'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Requisicao  $requisicao
+     * @param  \App\Models\Requisicao  $Requisicao
      * @return \Illuminate\Http\Response
      */
     public function edit(Requisicao $requisicao)
     {
-        $requisicao = RequisicaoService::getAllRequisicaoById();
-        return view('requisicao.criar_requisicao', ['requisicao'=>$requisicao]);
+        $materials = Material::all();
+        return view('requisicaos.edit', compact('materials','requisicao'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateRequisicaoRequest  $request
-     * @param  \App\Models\Requisicao  $requisicao
+     * @param  \App\Models\Requisicao  $Requisicao
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequisicaoRequest $request, Requisicao $requisicao)
     {
-        Requisicao::insertOrUpdateRequisicao($request);
-        return view('requisicao.index');
+        $requisicao->update($request->all());
+        return redirect()->route('requisicaos.index')->with(['success'=>'Registo Actualizado com sucesso']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Requisicao  $requisicao
+     * @param  \App\Models\Requisicao  $Requisicao
      * @return \Illuminate\Http\Response
      */
     public function destroy(Requisicao $requisicao)
     {
-        //
+        $requisicao->delete();
+        return redirect()->back()->with(['success'=>'Registo Eliminado com sucesso']);
     }
 }

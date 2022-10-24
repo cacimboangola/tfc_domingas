@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categoria;
+use App\Models\Material;
 use Illuminate\Database\Seeder;
 
 class MaterialSeeder extends Seeder
@@ -13,6 +15,7 @@ class MaterialSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Material::factory(100)
+            ->create();
     }
 }

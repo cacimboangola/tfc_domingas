@@ -16,16 +16,17 @@ class Material extends Model
         'stock_actual',
         'categoria_id',
         'stock_disponivel',
-        'preco'
+        'preco',
+        'nome'
     ];
     public function categoria(){
-        $this->belongsTo(Categoria::class, 'categoria_id');
+       return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
     public function compraItens(){
-        $this->hasMany(CompraItem::class);
+        return $this->hasMany(CompraItem::class);
     }
     public function requisicaoItens(){
-        $this->hasMany(RequisicaoItem::class);
+        return $this->hasMany(RequisicaoItem::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Material;
 use App\Models\Compra;
 use App\Http\Requests\StoreCompraRequest;
 use App\Http\Requests\UpdateCompraRequest;
@@ -16,8 +17,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-       $compra = CompraService::getAllCompra();
-       return view('compra.index', ['compra'=>$compra]);
+       $compras = Compra::all();
+       return view('compras.index', compact('compras'));
     }
 
     /**
@@ -27,7 +28,8 @@ class CompraController extends Controller
      */
     public function create()
     {
-        return view('compra.index');
+        $materials = Material::all();
+        return view('compras.create', compact('materials'));
     }
 
     /**
@@ -38,8 +40,8 @@ class CompraController extends Controller
      */
     public function store(StoreCompraRequest $request)
     {
-        Compra::insertOrUpdateCompra($request);
-        return view('compra.index');
+        Compra::create($request->all());
+        return redirect()->back()->with(['success'=>'Compra Cadastrada com Sucesso']);
     }
 
     /**
@@ -50,8 +52,7 @@ class CompraController extends Controller
      */
     public function show(Compra $compra)
     {
-        $compraPorId = CategoriaService::getAllCompraById();
-        return view('compra.ver_compra', ['compraPorId'=>$compraPorId]);
+        return view('compras.show', compact('compra'));
     }
 
     /**
@@ -62,8 +63,8 @@ class CompraController extends Controller
      */
     public function edit(Compra $compra)
     {
-        $compraPorId = CategoriaService::getAllCompraById();
-        return view('compra.criar_compra', ['compraPorId'=>$compraPorId]);
+        $materials = Material::all();
+        return view('compras.edit', compact('materials','compra'));
     }
 
     /**
@@ -75,8 +76,8 @@ class CompraController extends Controller
      */
     public function update(UpdateCompraRequest $request, Compra $compra)
     {
-        Compra::insertOrUpdateCategoria($request);
-        return view('compra.index');
+        $compra->update($request->all());
+        return redirect()->route('compras.index')->with(['success'=>'Registo Actualizado com sucesso']);
     }
 
     /**
@@ -87,6 +88,7 @@ class CompraController extends Controller
      */
     public function destroy(Compra $compra)
     {
-        //
+        $compra->delete();
+        return redirect()->back()->with(['success'=>'Registo Eliminado com sucesso']);
     }
 }

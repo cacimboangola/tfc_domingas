@@ -17,7 +17,7 @@ class CompraItemController extends Controller
     public function index()
     {
         $itens_compra = CompraItem::getAllCompraItemUser();
-        return view('compra.index', ['itens_compra'=>$itens_compra]);
+        return view('compras.index', ['itens_compra'=>$itens_compra]);
     }
 
     /**
@@ -27,7 +27,7 @@ class CompraItemController extends Controller
      */
     public function create()
     {
-        return view('compra.index');
+        return view('compras.index');
     }
 
     /**
@@ -39,7 +39,7 @@ class CompraItemController extends Controller
     public function store(StoreCompraItemRequest $request)
     {
         CompraItem::insertOrUpdateCompraItem($request);
-        return view('compra.index');
+        return view('compras.index');
     }
 
     /**
@@ -61,7 +61,7 @@ class CompraItemController extends Controller
      */
     public function edit(CompraItem $compraItem)
     {
-        
+
     }
 
     /**
@@ -73,7 +73,7 @@ class CompraItemController extends Controller
      */
     public function update(UpdateCompraItemRequest $request, CompraItem $compraItem)
     {
-       
+
     }
 
     /**

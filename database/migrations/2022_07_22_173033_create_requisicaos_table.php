@@ -15,12 +15,11 @@ class CreateRequisicaosTable extends Migration
     {
         Schema::create('requisicaos', function (Blueprint $table) {
             $table->id();
-            $table->date('data')->nullable();
+            $table->dateTime('data')->nullable();
             $table->string('obs', 100)->nullable();
             $table->integer('estado')->unsigned()->nullable()->default(0);
             $table->double('total', 15, 2)->nullable()->default(0.00);
-           /* $table->bigInteger('user_id')->nullable();*/
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

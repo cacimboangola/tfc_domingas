@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout');
+    return view('admin.dashboard');
 });
 /*=================== MATERIAL =============== */
-Route::resource('material','MaterialController');
- 
+Route::resources([
+    'materials' => MaterialController::class,
+    'compras' => CompraController::class,
+    'requisicaos' => RequisicaoController::class,
+    'categorias' => CategoriaController::class,
+    'users' => UserController::class
+]);
+Route::get('reports',[ReportController::class, 'create'])->name('reports');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
