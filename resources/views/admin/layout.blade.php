@@ -76,7 +76,7 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <img src="{{ asset('cacimbofront/images/avatar.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Brad Diesel
@@ -92,7 +92,7 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="{{ asset('cacimbofront/images/avatar.png')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     John Pierce
@@ -108,7 +108,7 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="{{ asset('cacimbofront/images/avatar.png')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Nora Silvester
@@ -164,8 +164,8 @@
     <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-            <img src="#" alt="Cacimbo Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Administrador</span>
+            <img src="{{ asset('cacimbofront/images/logo.png')}}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Gestão Patrimonial</span>
         </a>
 
         <!-- Sidebar -->
@@ -173,10 +173,10 @@
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="#" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('cacimbofront/images/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">User</a>
+                    <a href="#" class="d-block"> {{auth()->user()->name}} </a>
                 </div>
             </div>
 
@@ -240,6 +240,7 @@
                             </p>
                         </a>
                     </li>
+                    @if(auth()->user()->tipo == 'Administrador')
                     <li class="nav-item">
                         <a href="{{route('users.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
@@ -248,6 +249,7 @@
                             </p>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

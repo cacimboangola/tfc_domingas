@@ -4,7 +4,7 @@
             <!-- left column -->
             <div class="col-md-12">
                 <!-- general form elements -->
-                <div class="card card-primary">
+                <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title"></h3>
                     </div>
@@ -12,7 +12,7 @@
                     <div class="row ml-5 mr-4 mt-2">
                         <div class="col-12">
                             <h4>
-                                <i class="fas fa-globe"></i> Patrimonio
+                                <i class="fas fa-globe"></i> FACTURA GESTÃO DE PATRIMONIO
                                 <small class="float-right">Date:
                                     {{ \Carbon\Carbon::now()->locale('pt-BR')->format('d-m-Y H:i') }}</small>
                             </h4>
